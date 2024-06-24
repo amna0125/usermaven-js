@@ -1,4 +1,4 @@
-import { UsermavenClient, usermavenClient, UsermavenOptions } from "@usermaven/sdk-js";
+import { UsermavenClient, usermavenClient, UsermavenOptions } from "@amna1408/sdk-js";
 
 function createClient(params: UsermavenOptions): UsermavenClient {
   return usermavenClient(params)

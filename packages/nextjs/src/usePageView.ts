@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { EventPayload, UsermavenClient } from "@usermaven/sdk-js";
+import { EventPayload, UsermavenClient } from "@amna1408/sdk-js";
 import { useRouter } from "next/router";
 
 /**

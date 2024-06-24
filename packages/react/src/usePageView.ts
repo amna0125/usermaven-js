@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router";
 import useUsermaven from "./useUsermaven";
-import { EventPayload, UsermavenClient } from "@usermaven/sdk-js";
+import { EventPayload, UsermavenClient } from "@amna1408/sdk-js";
 
 /**
  * @param opts.callback callback that should be called sending data to jitsu. This will be a good place to identify user
