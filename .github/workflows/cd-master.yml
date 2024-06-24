@@ -41,9 +41,9 @@ jobs:
             echo $VERSION
             npm version $VERSION --no-git-tag-version
             echo "Publishing React SDK package"
-            cp ~/.npmrc .
-            #echo  "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc"
-            npm publish --no-workspaces             
+            #cp ~/.npmrc .
+            echo  "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc
+            npm publish --no-workspaces --access=public            
             cd - > /dev/null
         fi
         done
