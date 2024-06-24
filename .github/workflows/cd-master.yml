@@ -39,47 +39,19 @@ jobs:
             echo "Setting version for $package to $VERSION"
             cd $package
             echo $VERSION
-            npm version $VERSION --no-git-tag-version
-            echo "Publishing React SDK package"
-            #cp ~/.npmrc .
+            npm version $VERSION --no-git-tag-version    
+            cd - > /dev/null
+        fi
+        done
+
+    - name: Publishing SDK package
+      run: |
+        for package in packages/*; do
+        if [ -d "$package" ]; then
+            cd $package
+            echo "Publishing $package SDK package"
             echo  "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc
             npm publish --no-workspaces --access=public            
             cd - > /dev/null
         fi
         done
-
-    # - name: List directory contents
-    #   run: ls -R
-      
-
-    # - name: Publish React SDK package
-    #   run: |
-    #     echo "Publishing React SDK package"
-    #     #echo  \"//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}\" > .npmrc"
-    #     cd .packages/react
-    #     echo  \"//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}\" > .npmrc"
-    #     npm publish --no-workspaces     
-
-    # - name: Publish Javascript SDK package
-    #   run: |
-    #     echo "Publishing Javascript SDK package"
-    #     #echo  \"//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}\" > .npmrc"
-    #     cd .packages/javascript-sdk
-    #     echo  \"//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}\" > .npmrc"
-    #     npm publish --no-workspaces  
-
-    # - name: Publish Nextjs SDK package
-    #   run: |
-    #     echo "Publishing Nextjs SDK package"
-    #     #echo  \"//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}\" > .npmrc"
-    #     cd .packages/nextjs
-    #     echo  \"//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}\" > .npmrc"
-    #     npm publish --no-workspaces  
-
-    # - name: Publish React SDK package
-    #   run: |
-    #     echo "Publishing React SDK package"
-    #     #echo  \"//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}\" > .npmrc"
-    #     cd .packages/react
-    #     echo  \"//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}\" > .npmrc"
-    #     npm publish --no-workspaces          
