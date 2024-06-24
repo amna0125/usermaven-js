@@ -17,7 +17,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         always-auth: true
-        node-version: '18'
+        node-version: '20'
 
     - name: Install dependencies
       run: yarn install
@@ -44,15 +44,26 @@ jobs:
         fi
         done
 
-    - name: Publish each package
+    - name: Publish Javascript SDK package
       run: |
-        for package in packages/*; do
-          if [ -d "$package" ]; then
-            echo "Publishing $package"
-            cd $package
-            yarn publish --non-interactive --access public
-            cd - > /dev/null
-          fi
-        done
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}        
+        echo "Publishing Javascript SDK package"
+        echo  "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc"
+        cd ./packages/javascript-sdk
+        echo  "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc"
+        npm publish --no-workspaces  
+
+    - name: Publish Nextjs SDK package
+      run: |
+        echo "Publishing Nextjs SDK package"
+        echo  "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc"
+        cd ./packages/nextjs
+        echo  "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc"
+        npm publish --no-workspaces  
+
+    - name: Publish React SDK package
+      run: |
+        echo "Publishing React SDK package"
+        echo  "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc"
+        cd ./packages/react
+        echo  "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc"
+        npm publish --no-workspaces          
