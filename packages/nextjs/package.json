@@ -1,8 +1,8 @@
 {
-  "name": "@usermaven/nextjs",
+  "name": "@amna1408/nextjs",
   "version": "0.0.0",
   "description": "Usermaven JavaScript SDK for NextJS",
-  "author": "Usermaven <hello@usermaven.com>",
+  "author": "Amna <hello@usermaven.com>",
   "license": "MIT",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -18,7 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@usermaven/sdk-js": "^1.2.5",
+    "@amna1408/sdk-js": "^1.2.5",
     "cookie": "^0.5.0"
   },
   "peerDependencies": {
@@ -41,7 +41,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/usermaven/usermaven-js",
+    "url": "https://github.com/amna1408/usermaven-js",
     "directory": "packages/nextjs"
   }
 }
