@@ -1,6 +1,6 @@
 import * as React from 'react'
 import UsermavenContext from './UsermavenContext'
-import { UsermavenClient } from "@usermaven/sdk-js";
+import { UsermavenClient } from "@amna1408/sdk-js";
 import {PropsWithChildren} from "react";
 
 export interface UsermavenProviderProps {
