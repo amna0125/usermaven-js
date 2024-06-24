@@ -1,8 +1,8 @@
 {
-  "name": "@usermaven/react",
+  "name": "@amna1408/react",
   "version": "0.0.0",
   "description": "Usermaven JavaScript SDK for React",
-  "author": "Usermaven <hello@usermaven.com>",
+  "author": "amna <hello@usermaven.com>",
   "license": "MIT",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -40,7 +40,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/usermaven/usermaven-js",
+    "url": "https://github.com/amna1408/usermaven-js",
     "directory": "packages/react"
   }
 }
