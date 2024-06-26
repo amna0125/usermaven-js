@@ -1,4 +1,4 @@
-FROM node:16.5.0-alpine AS builder
+FROM node:20.15.0-alpine AS builder
 WORKDIR /usr/src
 COPY . .
 RUN yarn install && yarn build
