@@ -33,7 +33,7 @@ jobs:
     - name: Deploy to BunnyCDN
       uses: ayeressian/bunnycdn-storage-deploy@v2.2.3
       with:
-        source: "packages/javascript-sdk/dist/web/lib.js"
+        source: "packages/javascript-sdk/dist/web"
         destination: ""
         storageZoneName: "${{ secrets.BCDN_DEV_STORAGE_NAME }}"
         storagePassword: "${{ secrets.BCDN_DEV_STORAGE_PASSWORD }}"
