@@ -81,7 +81,7 @@ jobs:
         context: .
         file: ${{ env.DOCKERFILE_PATH }}
         push: true
-        tags: "latest,${{ GITHUB_SHA }}"
+        tags: "latest,${{ github.sha }}"
         labels: ${{ steps.meta.outputs.labels }}
   
   # update-k8s-manifest:
