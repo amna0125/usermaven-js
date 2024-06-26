@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react";
 import UsermavenContext from "./UsermavenContext";
-import { UsermavenClient, EventPayload, UserProps } from "@usermaven/sdk-js";
+import { UsermavenClient, EventPayload, UserProps } from "@amna1408/sdk-js";
 
 /**
  * See for details https://usermaven.com/docs/integrations/next

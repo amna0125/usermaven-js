@@ -1,6 +1,6 @@
 {
-  "name": "@usermaven/sdk-js",
-  "version": "1.4.0",
+  "name": "@amna1408/sdk-js",
+  "version": "0.0.0",
   "description": "Usermaven JavaScript SDK.",
   "main": "dist/npm/usermaven.cjs.js",
   "module": "dist/npm/usermaven.es.js",
@@ -9,7 +9,7 @@
     "dist/npm/*",
     "dist/web/*"
   ],
-  "author": "Usermaven <hello@usermaven.com>",
+  "author": "Amna <hello@usermaven.com>",
   "scripts": {
     "clean": "rm -rf ./dist",
     "devserver": "PORT=8081 nodemon --watch '__tests__/common/*.ts' --exec 'ts-node' __tests__/common/devserver.ts",

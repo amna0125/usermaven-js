@@ -2,9 +2,9 @@
   "name": "usermaven-website-monorepo",
   "private": true,
   "scripts": {
-    "build:javascript": "yarn workspace @usermaven/sdk-js build",
-    "build:nextjs": "yarn workspace @usermaven/nextjs build",
-    "build:react": "yarn workspace @usermaven/react build",
+    "build:javascript": "yarn workspace @amna1408/sdk-js build",
+    "build:nextjs": "yarn workspace @amna1408/nextjs build",
+    "build:react": "yarn workspace @amna1408/react build",
     "build": "yarn build:javascript && yarn build:nextjs && yarn build:react",
     "dev:javascript": "yarn workspace javascript-sdk dev",
     "dev": "yarn dev:javascript"
