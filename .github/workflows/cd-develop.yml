@@ -9,7 +9,8 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: usermaven-js-stage
-  DOCKERFILE_PATH: packages/javascript-sdk/docker/Dockerfile
+  #DOCKERFILE_PATH: packages/javascript-sdk/docker/Dockerfile
+  DOCKERFILE_PATH: Dockerfile
 
 jobs:
   dev_publish:
@@ -67,7 +68,10 @@ jobs:
       uses: docker/metadata-action@v4
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-    
+   
+    - name: change dir
+      run: cd packages/javascript-sdk/docker 
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
       with:
