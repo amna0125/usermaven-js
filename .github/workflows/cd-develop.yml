@@ -5,11 +5,22 @@ on:
     types: [ closed ]
     branches:
       - develop
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: usermaven-js-stage
+  DOCKERFILE_PATH: packages/javascript-sdk/docker/DockerFile
+
 jobs:
   dev_publish:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
     #needs: [release_on_merge]
+    permissions:
+      contents: read
+      packages: write
+
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -42,3 +53,49 @@ jobs:
         upload: "true"
         remove: "true"
         purgePullZone: "true"
+
+        
+    - name: Log in to the Container registry
+      uses: docker/login-action@v2
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+  
+    - name: Extract metadata for Docker
+      id: meta
+      uses: docker/metadata-action@v4
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+    
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ${{ env.DOCKERFILE_PATH }}
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+  
+  # update-k8s-manifest:
+  #   needs: build-and-push
+  #   runs-on: ubuntu-latest
+      
+  #   steps:
+  #   - name: Checkout kubernetes manifests repository
+  #     uses: actions/checkout@v3
+  #     with:
+  #       repository: your-org/kubernetes-manifests-staging
+  #       token: ${{ secrets.PAT_TOKEN }}
+    
+  #   - name: Update Kubernetes deployment
+  #     run: |
+  #       sed -i 's|image: .*|image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}|' deployment.yaml
+    
+  #   - name: Commit and push changes
+  #     run: |
+  #       git config --local user.email "action@github.com"
+  #       git config --local user.name "GitHub Action"
+  #       git add deployment.yaml
+  #       git commit -m "Update image to ${{ github.sha }}"
+  #       git push
