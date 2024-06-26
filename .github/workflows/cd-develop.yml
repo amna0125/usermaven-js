@@ -83,7 +83,7 @@ jobs:
         context: .
         file: ${{ env.DOCKERFILE_PATH }}
         push: true
-        tags: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }}"
+        tags: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
         labels: ${{ steps.meta.outputs.labels }}
   
   # update-k8s-manifest:
