@@ -1,0 +1,44 @@
+name: Develop CD
+
+on:
+  pull_request:
+    types: [ closed ]
+    branches:
+      - develop
+jobs:
+  dev_publish:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    #needs: [release_on_merge]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        always-auth: true
+        node-version: '20'
+
+    - name: Install dependencies
+      run: yarn install
+
+    - name: Ignore Workspace root check
+      run: yarn global add npm-cli-login --ignore-workspace-root-check  
+
+    - name: Build project
+      run: yarn build
+
+
+    - name: Deploy to BunnyCDN
+      uses: ayeressian/bunnycdn-storage-deploy@v2.2.3
+      with:
+        source: "packages/javascript-sdk/dist/web/lib.js"
+        destination: ""
+        storageZoneName: "${{ secrets.BCDN_DEV_STORAGE_NAME }}"
+        storagePassword: "${{ secrets.BCDN_DEV_STORAGE_PASSWORD }}"
+        accessKey: "${{ secrets.BCDN_ACCESS_KEY }}"
+        pullZoneId: "${{ secrets.BCDN_DEV_ZONE_ID }}"
+        upload: "true"
+        remove: "true"
+        purgePullZone: "true"
