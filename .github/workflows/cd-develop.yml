@@ -95,7 +95,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: amna0125/app-manifests-stage
-        token: ${{ secrets.PAT_TOKEN }}
+        token: ${{ secrets.PAT }}
     
     - name: Update Kubernetes deployment
       run: |
