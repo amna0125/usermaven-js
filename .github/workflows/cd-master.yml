@@ -5,7 +5,7 @@ on:
     types: [published]
 
 env:
-  VERSION: ${GITHUB_REF#refs/tags/}  
+  VERSION: ${{ github.event.release.tag_name }}
   REGISTRY: ghcr.io
   IMAGE_NAME: usermaven-js
   DOCKERFILE_PATH: packages/javascript-sdk/docker/Dockerfile
