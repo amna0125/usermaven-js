@@ -86,25 +86,25 @@ jobs:
         tags: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
         labels: ${{ steps.meta.outputs.labels }}
   
-  # update-k8s-manifest:
-  #   needs: build-and-push
-  #   runs-on: ubuntu-latest
+  update-k8s-manifest:
+    needs: dev-publish-docker
+    runs-on: ubuntu-latest
       
-  #   steps:
-  #   - name: Checkout kubernetes manifests repository
-  #     uses: actions/checkout@v3
-  #     with:
-  #       repository: your-org/kubernetes-manifests-staging
-  #       token: ${{ secrets.PAT_TOKEN }}
+    steps:
+    - name: Checkout kubernetes manifests repository
+      uses: actions/checkout@v4
+      with:
+        repository: amna0125/app-manifests-stage
+        token: ${{ secrets.PAT_TOKEN }}
     
-  #   - name: Update Kubernetes deployment
-  #     run: |
-  #       sed -i 's|image: .*|image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}|' deployment.yaml
+    - name: Update Kubernetes deployment
+      run: |
+        sed -i 's|image: .*|image: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }}|' deployment-manifests/usermaven-js.yaml
     
-  #   - name: Commit and push changes
-  #     run: |
-  #       git config --local user.email "action@github.com"
-  #       git config --local user.name "GitHub Action"
-  #       git add deployment.yaml
-  #       git commit -m "Update image to ${{ github.sha }}"
-  #       git push
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add deployment-manifests/usermaven-js.yaml
+        git commit -m "Update image to ${{ github.sha }}"
+        git push
